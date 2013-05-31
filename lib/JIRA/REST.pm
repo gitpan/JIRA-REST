@@ -1,6 +1,6 @@
 package JIRA::REST;
 {
-  $JIRA::REST::VERSION = '0.001';
+  $JIRA::REST::VERSION = '0.002';
 }
 # ABSTRACT: A thin wrapper around JIRA's REST API
 
@@ -54,7 +54,7 @@ sub new {
     my $rest = REST::Client->new($rest_client_config);
 
     # Set default base URL
-    $rest->setHost("$URL/rest/api/latest");
+    $rest->setHost($URL);
 
     # Follow redirects/authentication by default
     $rest->setFollow(1);
@@ -164,7 +164,7 @@ JIRA::REST - A thin wrapper around JIRA's REST API
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 SYNOPSIS
 
