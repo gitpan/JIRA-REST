@@ -1,6 +1,6 @@
 package JIRA::REST;
 {
-  $JIRA::REST::VERSION = '0.002';
+  $JIRA::REST::VERSION = '0.003';
 }
 # ABSTRACT: A thin wrapper around JIRA's REST API
 
@@ -164,7 +164,7 @@ JIRA::REST - A thin wrapper around JIRA's REST API
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
 
@@ -173,16 +173,16 @@ version 0.002
     my $jira = JIRA::REST->new('https://jira.example.net', 'myuser', 'mypass');
 
     # Cache some JIRA objects
-    my %issuetypes = {map {($_->{name} => $_)} @{$jira->GET('/issuetype')}};
-    my %priorities = {map {($_->{name} => $_)} @{$jira->GET('/priority' )}};
-    my %projects   = {map {($_->{name} => $_)} @{$jira->GET('/project'  )}};
+    my %issuetypes = map {($_->{name} => $_)} @{$jira->GET('/issuetype')};
+    my %priorities = map {($_->{name} => $_)} @{$jira->GET('/priority' )};
+    my %projects   = map {($_->{name} => $_)} @{$jira->GET('/project'  )};
 
     # A handy routine to construct id hashes
     sub id_of { return { id => $_[0]->{id} }; };
 
     # Cache information about a project
-    my $project    = $projects{'My Project'}->{id};
-    my %components = {map {($_->{name} => $_)} @{$jira->GET("/project/$pid/components")}};
+    my $pid        = $projects{'My Project'}->{id};
+    my %components = map {($_->{name} => $_)} @{$jira->GET("/project/$pid/components")};
 
     # File a bug
     my $issue = $jira->POST('/issue', undef, {
