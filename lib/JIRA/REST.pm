@@ -1,6 +1,6 @@
 package JIRA::REST;
 {
-  $JIRA::REST::VERSION = '0.003';
+  $JIRA::REST::VERSION = '0.004';
 }
 # ABSTRACT: A thin wrapper around JIRA's REST API
 
@@ -87,8 +87,10 @@ sub _content {
         croak "ERROR: $code - $message\n$type\n$content\n";
     }
 
+    return unless $content;
+
     if (! defined $type) {
-        return;
+        croak "Cannot convert response content with no Content-Type specified.\n";
     } elsif ($type =~ m:^application/json:i) {
         return $self->{json}->decode($content);
     } elsif ($type =~ m:^text/plain:i) {
@@ -158,13 +160,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 JIRA::REST - A thin wrapper around JIRA's REST API
 
 =head1 VERSION
 
-version 0.003
+version 0.004
 
 =head1 SYNOPSIS
 
