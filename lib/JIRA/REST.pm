@@ -1,6 +1,6 @@
 package JIRA::REST;
 {
-  $JIRA::REST::VERSION = '0.005';
+  $JIRA::REST::VERSION = '0.006';
 }
 # ABSTRACT: Thin wrapper around JIRA's REST API
 
@@ -104,7 +104,7 @@ sub _error {
     } else {
         $msg .= "<unconvertable Content-Type: '$type}'>";
     };
-    $msg =~ s/\n*$//s;       # strip trailing newlines
+    $msg =~ s/\n*$/\n/s;       # end message with a single newline
     return $msg;
 }
 
@@ -215,7 +215,7 @@ sub next_issue {
     if ($iter->{offset} == $iter->{results}{total}) {
         if ($iter->{results}{startAt} + $iter->{offset} == $iter->{results}{maxResults}) {
             $self->{iter} = undef;
-            return undef;
+            return;
         } else {
             $iter->{params}{startAt} = $iter->{results}{startAt} + $iter->{offset};
             $iter->{results}         = $self->POST('/search', $iter->{params});
@@ -240,7 +240,7 @@ JIRA::REST - Thin wrapper around JIRA's REST API
 
 =head1 VERSION
 
-version 0.005
+version 0.006
 
 =head1 SYNOPSIS
 
@@ -495,6 +495,10 @@ I got a message from the author saying that he doesn't intend to keep
 it going.
 
 =back
+
+=head1 REPOSITORY
+
+L<https://github.com/gnustavo/JIRA-REST>
 
 =head1 AUTHOR
 
