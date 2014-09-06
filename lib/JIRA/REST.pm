@@ -1,6 +1,6 @@
 package JIRA::REST;
 {
-  $JIRA::REST::VERSION = '0.007';
+  $JIRA::REST::VERSION = '0.008';
 }
 # ABSTRACT: Thin wrapper around JIRA's REST API
 
@@ -254,7 +254,7 @@ JIRA::REST - Thin wrapper around JIRA's REST API
 
 =head1 VERSION
 
-version 0.007
+version 0.008
 
 =head1 SYNOPSIS
 
