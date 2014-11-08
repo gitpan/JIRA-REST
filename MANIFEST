@@ -7,7 +7,6 @@ Makefile.PL
 README.pod
 dist.ini
 lib/JIRA/REST.pm
-lib/JIRA/REST.pm.orig
 t/00-load.t
 t/release-kwalitee.t
 t/release-pod-coverage.t
